@@ -1,54 +1,152 @@
-# React + TypeScript + Vite
+# VCHAT FR - Real-time Chat Application
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A modern, real-time chat application built with React, TypeScript, and WebSocket technology. VCHAT FR provides a seamless and responsive chatting experience with a sleek, dark-themed interface.
 
-Currently, two official plugins are available:
+## 🌟 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Real-time messaging
+- Room-based chat system
+- Modern dark theme UI
+- Responsive design
+- Instant message delivery
+- Auto-scroll to latest messages
+- Enter key support for sending messages
 
-## Expanding the ESLint configuration
+## 🔧 Technology Stack
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+- **Frontend:**
+  - React 19
+  - TypeScript
+  - Tailwind CSS
+  - shadcn/ui components
+  - Vite
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- **Communication:**
+  - WebSocket Protocol
+  - JSON message format
+
+## 🔄 Application Flow
+
+```mermaid
+graph TD
+    A[Start] --> B{Connected to Room?}
+    B -->|No| C[Show Room Join UI]
+    C --> D[Enter Room ID]
+    D --> E[Connect to WebSocket]
+    E --> F[Join Room]
+    B -->|Yes| G[Show Chat Interface]
+    G --> H[Send/Receive Messages]
+    H --> I[Display Messages]
+    I --> J[Auto-scroll to Latest]
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 📡 WebSocket Message Format
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
-
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
+### Join Room Message
+```json
+{
+  "type": "join",
+  "payload": {
+    "roomId": "string"
+  }
+}
 ```
+
+### Chat Message
+```json
+{
+  "type": "chat",
+  "payload": {
+    "message": "string"
+  }
+}
+```
+
+## 🏗️ Component Structure
+
+```mermaid
+graph TD
+    A[App Component] --> B[Room Join View]
+    A --> C[Chat View]
+    C --> D[Message List]
+    C --> E[Input Area]
+    E --> F[Message Input]
+    E --> G[Send Button]
+```
+
+## 🚀 Getting Started
+
+1. Clone the repository
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
+4. Open your browser and navigate to the provided local URL
+
+## 💻 Usage
+
+1. Enter a room ID to join or create a new room
+2. Start chatting in real-time with others in the same room
+3. Messages are delivered instantly to all room participants
+4. Use Enter key or Send button to send messages
+
+## 🎨 UI Features
+
+- Clean, minimalist design
+- Dark theme for reduced eye strain
+- Responsive layout for all screen sizes
+- Smooth animations and transitions
+- Clear message separation
+- Auto-scrolling message view
+
+## ⚙️ Development
+
+### Prerequisites
+- Node.js 18+
+- npm or yarn
+- Modern web browser
+
+### Build for Production
+```bash
+npm run build
+```
+
+### Lint Code
+```bash
+npm run lint
+```
+
+## 🔐 Security Considerations
+
+- WebSocket connections are established directly with the server
+- Messages are validated before processing
+- Room IDs are required for chat access
+- Input sanitization is implemented
+
+## 🤝 Contributing
+
+1. Fork the repository
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Open a Pull Request
+
+## 📄 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🎯 Future Enhancements
+
+- User authentication
+- Persistent message history
+- File sharing capabilities
+- User typing indicators
+- Read receipts
+- Private messaging
+- Custom room settings
+- Emoji support
+- Message reactions
